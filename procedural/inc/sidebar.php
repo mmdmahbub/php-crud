@@ -15,10 +15,6 @@
 					<li class="">
 						<a href="index.php" ><i class="fa fa-home "></i> Home</a>
 					</li>
-					<!--  Home menu item end-->
-					<li class="">
-						<a href="add.php" ><i class="fa fa-plus "></i> Add data</a>
-					</li>
 					
 
 				</ul>

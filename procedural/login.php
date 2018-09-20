@@ -1,3 +1,44 @@
+<?php
+	require_once('config/config.php');
+	ob_start();
+	session_start();
+	if(isset($_SESSION['crud_user'])){
+		header('location: index.php');
+	}
+	$msg = "";
+	if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		$email = htmlentities($_POST['email'],ENT_QUOTES);
+		$pass  = $_POST['pass'];
+		
+		if(empty($email)){
+			$msg .= "<li>". "Email field is empty" . "</li>";
+		}elseif(!preg_match('/^[0-9-a-z]+@+[0-9-a-z].+[a-z]{2,10}$/i',$email)){
+			$msg .= "<li>". "Email is not valid" . "</li>";
+		}
+		
+		if(empty($pass)){
+			$msg .= "<li>". "Password field is empty" . "</li>";
+		}
+		
+		$password = md5($pass);
+		$sel   = "SELECT * FROM users WHERE email='$email' AND password='$password'";
+		$qri   = mysqli_query($con,$sel);
+		$res   = mysqli_fetch_array($qri);
+		
+		$_SESSION['crud_user'] =  $res['id'];
+		$count = mysqli_num_rows($qri);
+		
+		if(!$msg){
+			if($count > 0){
+				header('location: index.php');
+			}else{
+				$msg .= "<li>". "Email or password is not valid" . "</li>";
+			}
+		}
+		
+	
+	}
+?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
@@ -45,13 +86,14 @@
 		<div class="sign_up" >
 			<div class="sign_up_wrapper">
 				<h4 style="text-transform: uppercase">Sign In</h4>
-				<div id="login_error" class="login_error">
+				<div id="" class="error_msg">
 					<div id="loader" class="" style=""><img src="preloader.gif" alt="" /></div>
+					<?= $msg; ?>
 				</div>
 				<div class="login_error_msg"></div>
-				<form action="#" method="post">
-					<input type="email" placeholder="Email/User Name" name="user_email" id="user_email" />
-					<input type="password" placeholder="Password" name="user_pass" id="user_pass" />
+				<form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+					<input type="email" placeholder="Email/User Name" name="email" id="user_email" />
+					<input type="password" placeholder="Password" name="pass" id="user_pass" />
 					<br />
 					<input type="submit" class="btn btn-info" value="login" id="btn_login" name="btn_login">
 				</form>

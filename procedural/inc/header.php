@@ -1,10 +1,17 @@
+<?php
+	ob_start();
+	session_start();
+	if(!isset($_SESSION['crud_user'])){
+		header('location: login.php');
+	}
+?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<title>Focus School Management system</title>
+	<title>PHP Cruds - Procedural</title>
 	<meta name="description" content="Focus is a Well organized and easy to understand school management application for kinder garden and high schools"/>
 	<link rel="icon" href="public/images/icon2.png" />
 	<!-- Bootstrap v-3.7 -->

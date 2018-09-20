@@ -1,8 +1,11 @@
 <?php
 	//Database credential
-	date_default_timezone_set("Asia/Dhaka");
+	$host = "127.0.0.1";
+	$user = "root";
+	$pass = "";
+	$db	  = "php_cruds";
 	
-	define('DB_HOST', 'localhost');
-	define('DB_USER', 'root');
-	define('DB_PASS', '');
-	define('DB_NAME', 'focus');
+	$con = mysqli_connect("$host","$user","$pass","$db");
+	if(!$con){
+		echo "Failed to connect";
+	}

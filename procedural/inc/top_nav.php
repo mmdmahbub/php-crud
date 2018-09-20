@@ -8,8 +8,8 @@
 			</div>
 			<div class="col-md-4 ">
 				<div class="mysearch">
-					<form  method="post" action="search.php?m=default">
-						<input class="effect-2" type="text" placeholder="Search here" name="find" size="40" maxlength="50"/>
+					<form  action="search.php"  method="get">
+						<input class="effect-2" type="text" placeholder="Search here" name="field" />
 						<button type="submit" name="search" ><i class="fa fa-search"></i></button>
 						<span class="focus-border"></span>
 					</form>
@@ -76,11 +76,3 @@
 <div class="content_body">
 <br />
 <br />
-<div class="col-md-12">
-	<div class="display-error" >
-		<div class="alert bg_color2">
-			hello
-		</div>
-		<span class='my_style'><i class='fa fa-times'></i></span>
-	</div>
-</div>
